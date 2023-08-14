@@ -25,7 +25,7 @@ class ControlProducto extends Producto implements InterfaceApiUsable
                     $pass ="cp35371754";
                     $pdo = new PDO($conStr,$user,$pass);
     
-                    $sentencia = $pdo->prepare("INSERT INTO productos (nombre,categoria,
+                    $sentencia = $pdo->prepare("INSERT INTO producto (nombre,categoria,
                                                                        precioVenta,idProducto) 
                                                     VALUES (:nombre,:categoria,
                                                             :precioVenta,:idProducto) ");
@@ -85,7 +85,7 @@ class ControlProducto extends Producto implements InterfaceApiUsable
                     $pass ="cp35371754";
                     $pdo = new PDO($conStr,$user,$pass);
     
-                    $sentencia = $pdo->prepare("SELECT FROM productos WHERE idProducto = :idProducto");
+                    $sentencia = $pdo->prepare("SELECT FROM producto WHERE idProducto = :idProducto");
                     $sentencia->bindValue(':idProducto', $idProducto);
 
 
@@ -148,7 +148,7 @@ class ControlProducto extends Producto implements InterfaceApiUsable
                 $pass ="cp35371754";
                 $pdo = new PDO($conStr,$user,$pass);
     
-                $sentencia = $pdo->prepare("SELECT FROM productos");
+                $sentencia = $pdo->prepare("SELECT FROM producto");
 
                 if($sentencia->execute())
                 {
@@ -216,7 +216,7 @@ class ControlProducto extends Producto implements InterfaceApiUsable
                     $pass ="cp35371754";
                     $pdo = new PDO($conStr,$user,$pass);
     
-                    $sentencia = $pdo->prepare("UPDATE productos SET precioVenta = :precioVenta
+                    $sentencia = $pdo->prepare("UPDATE producto SET precioVenta = :precioVenta
                                                 WHERE idProducto = :idProducto");
                     $sentencia->bindValue(':precioVenta', $precioVenta);
                     $sentencia->bindValue(':idProducto', $idProducto);
@@ -272,7 +272,7 @@ class ControlProducto extends Producto implements InterfaceApiUsable
                     $pass ="cp35371754";
                     $pdo = new PDO($conStr,$user,$pass);
     
-                    $sentencia = $pdo->prepare("DELETE FROM productos
+                    $sentencia = $pdo->prepare("DELETE FROM producto
                                                 WHERE idProducto = :idProducto");
                     $sentencia->bindValue(':idProducto', $idProducto);
 

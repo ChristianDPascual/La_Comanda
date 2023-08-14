@@ -14,7 +14,7 @@ class ControlOrden extends Ordenes implements InterfaceApiUsable
             $cantidad = $parametros["cantidad"];
             $estado = $parametros["estado"];
             $idProducto = $parametros["idProducto"];
-            $fechaOrden = $parametros["fechaOrden"];
+            $fecha = $parametros["fecha"];
             $tiempoRestante = $parametros["tiempoRestante"];
 
             if(validarCadena($idServicio) && validarNumero($cantidad) && validarNumero($idProducto)
@@ -27,15 +27,15 @@ class ControlOrden extends Ordenes implements InterfaceApiUsable
                     $pass ="cp35371754";
                     $pdo = new PDO($conStr,$user,$pass);
     
-                    $sentencia = $pdo->prepare("INSERT INTO orden (idServicio,cantidad,estado,
-                                                                   idProducto,fechaOrden,tiempoRestante) 
+                    $sentencia = $pdo->prepare("INSERT INTO ordenes (idServicio,cantidad,estado,
+                                                                   idProducto,fecha,tiempoRestante) 
                                                     VALUES (:idServicio,:cantidad,:estado,
-                                                            :idProducto,:fechaOrden,:tiempoRestante)");
+                                                            :idProducto,:fecha,:tiempoRestante)");
                     $sentencia->bindValue(':idServicio', $idServicio);
                     $sentencia->bindValue(':cantidad', $cantidad);
                     $sentencia->bindValue(':estado', $estado);
                     $sentencia->bindValue(':idProducto', $idProducto);
-                    $sentencia->bindValue(':fechaOrden', $fechaOrden);
+                    $sentencia->bindValue(':fecha', $fecha);
                     $sentencia->bindValue(':tiempoRestante', $tiempoRestante);
 
                     if($sentencia->execute())
@@ -106,7 +106,7 @@ class ControlOrden extends Ordenes implements InterfaceApiUsable
                                 $ip = $orden["idProducto"];
                                 $c = $orden["cantidad"];
                                 $e = $orden["estado"];
-                                $f = $orden["fechaOrden"];
+                                $f = $orden["fecha"];
                                 $t = $orden["tiempoRestante"];
 
                                 echo ("id servicio  $is id producto $ip cantidad $c estado $e 
@@ -177,7 +177,7 @@ class ControlOrden extends Ordenes implements InterfaceApiUsable
                             $ip = $orden["idProducto"];
                             $c = $orden["cantidad"];
                             $e = $orden["estado"];
-                            $f = $orden["fechaOrden"];
+                            $f = $orden["fecha"];
                             $t = $orden["tiempoRestante"];
 
                             echo ("id servicio  $is id producto $ip cantidad $c estado $e 

@@ -57,6 +57,46 @@ class Mesa
         }
         return $valor;
     }
+    
+    public static function traerIDServicioActivoCliente($dni)
+    {
+        try
+        {
+            $estado = "cerrada";
+            $conStr = "mysql:host=localhost;dbname=admin_comanda";
+            $user ="yo";
+            $pass ="cp35371754";
+            $pdo = new PDO($conStr,$user,$pass);
+
+        
+            $sentencia = $pdo->prepare("SELECT FROM mesa WHERE dniCliente = :dni AND estado != :estado");
+            $sentencia->bindValue(':dni', $dni);
+            $sentencia->bindValue(':estado', $estado);
+
+            if($sentencia->execute())
+            {
+                $resultado = $sentencia->fetch(PDO :: FETCH_ASSOC);
+
+                if(isset($resultado))
+                {
+                    return $resultado["idServicio"];
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            
+        }
+        catch(PDOException $e)
+        {
+            $pdo = null;
+            $payload = json_encode(array("mensaje"=>"Error al realizar la coneccion con la base de datos\n"));
+            $response->getBody()->write($payload);
+            echo "Error: " .$e->getMessage();
+            return $response->withHeader('Content-Type', 'application/json');
+        }
+    }
 }
 
 ?>
